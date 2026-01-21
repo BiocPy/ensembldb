@@ -70,6 +70,7 @@ class EnsDbRegistry:
         conn = sqlite3.connect(md_path)
         try:
             # Filter for EnsDb sqlite files
+            # Updated query: Checks rdataclass AND rdatapath extension
             query = """
             SELECT
                 r.id,
@@ -85,8 +86,8 @@ class EnsDbRegistry:
                 ON r.location_prefix_id = lp.id
             LEFT JOIN rdatapaths rp
                 ON rp.resource_id = r.id
-            WHERE r.title LIKE 'Ensembl % EnsDb%' 
-              AND r.title LIKE '%.sqlite'
+            WHERE (rp.rdataclass = 'EnsDb' OR r.title LIKE 'Ensembl % EnsDb%')
+              AND rp.rdatapath LIKE '%.sqlite'
             ORDER BY r.rdatadateadded DESC;
             """
             cursor = conn.cursor()
