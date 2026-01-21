@@ -1,0 +1,37 @@
+ensembldb package
+=================
+
+Submodules
+----------
+
+ensembldb.ensdb module
+----------------------
+
+.. automodule:: ensembldb.ensdb
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensembldb.record module
+-----------------------
+
+.. automodule:: ensembldb.record
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+ensembldb.registry module
+-------------------------
+
+.. automodule:: ensembldb.registry
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: ensembldb
+   :members:
+   :show-inheritance:
+   :undoc-members:
