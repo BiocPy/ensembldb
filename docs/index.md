@@ -1,18 +1,16 @@
-# ensembldb
+# EnsemblDb
 
-Access EnsemblDB objects
+**EnsemblDb** provides a Python interface to **Ensembl Annotation Databases (EnsDb)**. It mirrors the functionality of the Bioconductor `ensembldb` package, allowing users to efficiently query gene, transcript, and exon annotations from SQLite-based annotation files.
 
+This package is part of the **BiocPy** ecosystem and integrates seamlessly with [GenomicRanges](https://github.com/biocpy/genomicranges).
 
-## Note
+## Install
 
-> This is the main page of your project's [Sphinx] documentation. It is
-> formatted in [Markdown]. Add additional pages by creating md-files in
-> `docs` or rst-files (formatted in [reStructuredText]) and adding links to
-> them in the `Contents` section below.
->
-> Please check [Sphinx] and [MyST] for more information
-> about how to document your project and how to configure your preferences.
+To get started, install the package from [PyPI](https://pypi.org/project/ensembldb/)
 
+```bash
+pip install ensembldb
+```
 
 ## Contents
 
