@@ -1,5 +1,4 @@
 import sqlite3
-from typing import Dict, List, Optional, Union
 
 from biocframe import BiocFrame
 from genomicranges import GenomicRanges
@@ -63,7 +62,7 @@ class EnsDb:
         except sqlite3.OperationalError:
             return False
 
-    def genes(self, filter: Optional[Dict[str, Union[str, List[str]]]] = None) -> GenomicRanges:
+    def genes(self, filter: dict[str, str | list[str]] | None = None) -> GenomicRanges:
         """Retrieve genes as GenomicRanges.
 
         Args:
@@ -83,7 +82,7 @@ class EnsDb:
         entrez_col = ", g.entrezid" if has_entrez else ""
 
         query = f"""
-        SELECT 
+        SELECT
             g.gene_id, g.gene_name, g.gene_biotype,
             g.seq_name, g.gene_seq_start, g.gene_seq_end, g.seq_strand{entrez_col},
             c.seq_length
@@ -114,7 +113,7 @@ class EnsDb:
 
         return self._make_gr(bf, prefix="gene_")
 
-    def transcripts(self, filter: Optional[Dict[str, Union[str, List[str]]]] = None) -> GenomicRanges:
+    def transcripts(self, filter: dict[str, str | list[str]] | None = None) -> GenomicRanges:
         """Retrieve transcripts as GenomicRanges.
 
         Args:
@@ -130,7 +129,7 @@ class EnsDb:
             A GenomicRanges object containing transcript coordinates and metadata.
         """
         query = """
-        SELECT 
+        SELECT
             t.tx_id, t.tx_biotype, t.gene_id,
             t.tx_seq_start, t.tx_seq_end,
             g.seq_name, g.seq_strand, g.gene_name,
@@ -166,7 +165,7 @@ class EnsDb:
 
         return self._make_gr(bf, prefix="tx_")
 
-    def exons(self, filter: Optional[Dict[str, Union[str, List[str]]]] = None) -> GenomicRanges:
+    def exons(self, filter: dict[str, str | list[str]] | None = None) -> GenomicRanges:
         """Retrieve exons as GenomicRanges.
 
         Args:
