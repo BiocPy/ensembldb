@@ -1,7 +1,7 @@
 import os
 import sqlite3
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
 from pybiocfilecache import BiocFileCache
 
@@ -19,7 +19,7 @@ class EnsDbRegistry:
 
     def __init__(
         self,
-        cache_dir: Optional[Union[str, Path]] = None,
+        cache_dir: str | Path | None = None,
         force: bool = False,
     ) -> None:
         """Initialize the EnsDb registry.
@@ -35,7 +35,7 @@ class EnsDbRegistry:
         self._cache_dir.mkdir(parents=True, exist_ok=True)
         self._bfc = BiocFileCache(self._cache_dir)
 
-        self._registry_map: Dict[str, EnsDbRecord] = {}
+        self._registry_map: dict[str, EnsDbRecord] = {}
         self._initialize_registry(force=force)
 
     def _initialize_registry(self, force: bool = False):
@@ -100,7 +100,7 @@ class EnsDbRegistry:
             record = EnsDbRecord.from_db_row(row)
             self._registry_map[record.ensdb_id] = record
 
-    def list_ensdbs(self) -> List[str]:
+    def list_ensdbs(self) -> list[str]:
         """List available EnsDb IDs."""
         return sorted(list(self._registry_map.keys()))
 
@@ -151,7 +151,7 @@ class EnsDbRegistry:
         path = self.download(ensdb_id, force=force)
         return EnsDb(path)
 
-    def _get_filepath(self, resource: Any) -> Optional[str]:
+    def _get_filepath(self, resource: Any) -> str | None:
         if hasattr(resource, "rpath"):
             rel_path = str(resource.rpath)
         elif hasattr(resource, "get"):
