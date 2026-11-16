@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import date, datetime
-from typing import Optional
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -15,22 +14,22 @@ class EnsDbRecord:
 
     ensdb_id: str  # e.g., "AH12345"
     title: str
-    species: Optional[str]
-    taxonomy_id: Optional[str]
-    genome: Optional[str]
-    description: Optional[str]
+    species: str | None
+    taxonomy_id: str | None
+    genome: str | None
+    description: str | None
     url: str
-    release_date: Optional[date]
-    ensembl_version: Optional[str] = None
+    release_date: date | None
+    ensembl_version: str | None = None
 
     @classmethod
-    def from_db_row(cls, row: tuple) -> "EnsDbRecord":
+    def from_db_row(cls, row: tuple) -> EnsDbRecord:
         """Build a record from a database query row."""
         rid, title, species, tax_id, genome, desc, url, date_str = row
 
         ah_id = f"AH{rid}"
 
-        rel_date: Optional[date] = None
+        rel_date: date | None = None
         if date_str:
             try:
                 rel_date = datetime.strptime(str(date_str).split(" ")[0], "%Y-%m-%d").date()
