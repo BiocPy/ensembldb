@@ -15,6 +15,6 @@ except PackageNotFoundError:  # pragma: no cover
 finally:
     del version, PackageNotFoundError
 
+from .ensdb import EnsDb
 from .record import EnsDbRecord
 from .registry import EnsDbRegistry
-from .ensdb import EnsDb
